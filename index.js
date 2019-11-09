@@ -5,24 +5,27 @@ const outTask = document.querySelector('.out-task');
 
 
 
-addToList.addEventListener('click', (dataToSend) => {
+addToList.addEventListener('click', () => {
     const xhr = new XMLHttpRequest();
 
     const dataFromInput = textBox.value;
     const dataToSend = {
-        item: dataFromInput,
+        "item": dataFromInput,
     };
 
-    const json = JSON.stringify(dataToSend);
+   // let formData = new FormData([document.forms]); // создаём объект, по желанию берём данные формы <form>
+
+
+
 
     xhr.open('POST', 'api/todo.json', true);
 
-    xhr.responseType = 'json';
-
     xhr.setRequestHeader('Content-type', 'application/json');
 
-    xhr.send();
+    xhr.responseType = 'json';
 
+    xhr.send(dataToSend);
 
+    xhr.onload = () => alert(xhr.response);
 })
 
